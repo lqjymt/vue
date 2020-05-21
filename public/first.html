@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h3>i am  first hot reload vue html</h3>
+    <div id="div1" > name: {{name}}
+        <input type="button" value="click start" @click="start"></input>
+        <input type="button" value="click end" @click="end"></input>
+    </div>
+</body>
+<script>
+
+        var myVue = new Vue({
+        el:"#div1",
+        data:{
+            name:'生命不息，奋斗不止',
+            intervalId:null
+        },
+        methods:{
+            change:function(){
+                this.name += 'xiefa';
+            },
+            start:function(){
+                if(this.intervalId != null) return;
+
+                this.intervalId = setInterval(() => {
+                    var start = this.name.substring(0,1);
+                    var end = this.name.substring(1);
+                    this.name = end + start;
+                    console.log(this.name);
+                }, 100);
+            },
+            end:function(){
+                clearInterval(this.intervalId);
+                this.intervalId = null;
+            }
+        }
+    });
+
+
+</script>
+</html>
