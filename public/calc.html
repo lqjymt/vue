@@ -3,9 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>simple calc</title>
+    <script src="../src/js/vue.min.js"></script>
+
 </head>
 <body>
     <span>i am calc span</span>
+    <div id="app">
+        <input type="text" v-model="x" @input="calc">
+        <select v-model="opt" @change="calc">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="text" v-model="y" @input="calc">
+        <input type="text" v-model="result">
+        <input type="button" @click="calc" value="calc">
+    </div>
+    <div id="list">
+        <p v-if="true">i am test v-if</p>
+        <ul>
+            <li v-for="item in list">{{item}} </li>
+        </ul>
+    </div>
 </body>
+<script>
+    new Vue({
+        el:"#list",
+        data:{
+            list:[1,2,3,4,5]
+        }
+    })
+        new Vue({
+            el:"#app",
+            data:{
+                x:0,
+                y:0,
+                opt:'+',
+                result:0
+            },
+            methods:{
+                calc:function(){
+                    console.log('x:'+this.x+"--y---"+this.y);
+                    switch(this.opt){
+                        case '+':
+                            this.result = parseInt(this.x) + parseInt(this.y);
+                            break;
+                            case '-':
+                            this.result = parseInt(this.x) - parseInt(this.y);
+                            break;
+                            case '*':
+                            this.result = parseInt(this.x) * parseInt(this.y);
+                            break;
+                            case '/':
+                            this.result = parseInt(this.x) / parseInt(this.y);
+                            break;
+
+                    }
+                }
+            }
+        })
+</script>
 </html>

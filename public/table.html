@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>table test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+
+    <style>
+        .table{
+            width: 800px;
+            height: 20px auto; 
+            border-collapse: collapse;
+        }
+        .table th{
+            background-color: #0094ff;
+            color:white;
+            font-size: 16px;
+            border: 1px solid black;
+            padding: 5px;
+        }
+        .table tr td{
+            text-align: center;
+            font-size: 16px;
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+    <div style="margin-bottom: 10px;">
+        编号：<input type="text" id="code" v-model="formdata.id" v-focus>
+        名称：<input type="text" v-model="formdata.name" @keyup.enter="add"
+        @keyup.left="toleft">
+        <input type="button" value="add" @click="add">
+        搜索<input type="text" v-model="keyWords">
+    </div>
+    <span>{{msg | msgFormat('单纯','邪恶')}}</span>
+    <br>
+    <span>{{time | dateFmt}}</span>
+        <table class="table">
+            <tr>
+                <th>编号</th>
+                <th>名称</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            <tr v-show="list.length==0" >
+                <td colspan="4">列表无数据</td>
+            </tr>
+            <tr v-for="item in search(keyWords)">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.time}}</td>
+                <td><a href="#" @click="del(item.id)">  删除</a></td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        Vue.directive('focus',{
+            bind:function(el){
+                console.log('bind');
+    
+            },
+            inserted:function(el){
+                console.log('insert');
+                el.focus();
+            },
+            update:function(el){
+                console.log('update');
+                
+            }
+        })
+        Vue.filter('msgFormat',function(myMsg,arg1,arg2){
+            return myMsg.replace(/单纯/g,arg1+arg2);
+        })
+        Vue.filter('dateFmt',function(time){
+            let year = time.getFullYear();
+            let month = time.getMonth() + 1;
+            let day = time.getDate();
+            return year+'-'+month+'-'+day;
+        })
+        new Vue({
+            el:'#app',
+            created:function(){
+                console.log('created');
+                this.getList();
+            },
+            data:{
+                what:'what this',
+                list:[{id:1,name:'奔驰',time:new Date},
+                      {id:2,name:'大众',time:new Date}],
+                formdata:{
+                    id:'',
+                    name:''
+                },
+                keyWords:'',
+                time:new Date(),
+                msg:'曾经，我也是一个单纯的少年，单纯的我，傻傻的问，谁是世界上最单纯的男人'
+            },
+            methods:{
+                add:function(){
+                    var p = {id:this.formdata.id,name:this.formdata.name,time: new Date}
+                    this.list.push(p);
+                    this.formdata.id= '';
+                    this.formdata.name= '';
+                },
+                getList:function(){
+                    this.$http.get('http://vueapi.ittun.com/api/getprodlist')
+                    .then(function(response){
+                        console.log(response)
+                    })
+                },
+
+                del:function(id){
+                    if(confirm('确认删除?')){
+                        var index =  this.list.findIndex(function(item){
+                      return item.id==id;
+                  })
+                  this.list.splice(index,1);
+                    }
+                   
+                },
+
+                toleft:function(id){
+                    document.querySelector("#code").focus();
+                },
+
+                search:function(keyWords){
+                var newList = [];
+                this.list.forEach(item=>{
+                    if(item.name.indexOf(keyWords) != -1){
+                        newList.push(item);
+                    }
+                })
+                return newList;
+                }
+                
+            }
+        })
+    </script>
+</body>
+
+</html>
