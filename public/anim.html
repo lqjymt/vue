@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../src/js/vue.min.js"></script>
+    <title>anim</title>
+    <style>
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(80px);
+        }
+
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 1s ease;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="toggle" @click="flag=!flag">
+        <transition>
+            <h3 v-if="flag">这是一个H3</h3>
+        </transition>
+      
+
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                flag:true
+            },
+            methods:{
+                
+            }
+        })
+    </script>
+</body>
+</html>
