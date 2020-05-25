@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>component</title>
+    <script src="../src/js/vue.min.js"></script>
+    <script src="../src/js/vue.min.js"></script>
+</head>
+<body>
+    <div id='app'>
+        <account></account>
+    </div>
+    <div id="test">
+        <component1 v-bind:parent-msg='msg' @parent-show='show'></component1>
+    </div>
+    <template id="pass">
+        <h2 @click="childClick">我是子组件，我想使用父组件中的数据：{{parentMsg}}</h2>
+    </template>
+    
+    <script>
+        var myAccount = Vue.extend({
+            template:'<div><h2>登录页面</h2><h3>注册页面</h3></div>'
+        });
+        Vue.component('account',myAccount);
+        new Vue({
+            el:'#app'
+        });
+
+        new Vue({
+            el:'#test',
+            data:{
+                msg:'父组件中的数据123456'
+            },
+            methods:{
+                show:function(arg1){
+                    console.log('父组件的show方法'+arg1);
+                }
+            },
+            components:{
+                component1:{
+                    template:'#pass',
+                    props:['parentMsg'],
+                    data(){
+                        return{
+                            content:'are  you ok'
+                        }
+                    },
+                    methods:{
+                        childClick:function(){
+                            this.$emit('parent-show',this.content);
+                        }
+                    }
+                  },
+                            
+                }
+          
+        });
+    </script>
+</body>
+</html>
