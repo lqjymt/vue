@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../src/js/vue.min.js"></script>
+    <script src="../js/vue.min.js"></script>
+    <link  rel = "stylesheet" href="../css/a.css"/>
     <title>anim</title>
     <style>
         .v-enter,
@@ -16,6 +17,28 @@
         .v-leave-active{
             transition: all 1s ease;
         }
+        .banner{
+            height: 200px;
+            background-image: linear-gradient(to right,#ff0,#f00);
+           /* background-image: url('http://a0.att.hudong.com/56/12/01300000164151121576126282411.jpg'); */
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 100% auto;
+            background-origin: border-box;
+
+        /* 裁剪出圆形区域 */
+            clip-path: circle(50px at 100px 100px);
+            transition: clip-path .4s;
+        }
+        .banner:hover{
+            clip-path: circle(80px at 100px 100px);
+        }
+        /* .nav{
+            width: 200px;
+            padding-left: 20px;
+            padding-right: 20px;
+            background-image: linear-gradient(#f00,#f0f);
+        } */
 
     </style>
 </head>
@@ -25,9 +48,18 @@
         <transition>
             <h3 v-if="flag">这是一个H3</h3>
         </transition>
-      
-
     </div>
+    <div class="banner"> 
+    </div>
+    <div>
+        <a class="nav" style="color:red">导航一</a>
+        <a class="nav">导航二</a>
+        <a class="nav">导航三</a>
+        <a class="nav">导航四</a>
+    </div>
+    <abbr title="etcetera">etc.</abbr>
+    <div class="backtop">back</div>
+    <div></div>
     <script>
         new Vue({
             el:"#app",
