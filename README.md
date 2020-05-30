@@ -1,42 +1,53 @@
 CSS
-    div 标签选择器
-     .box 类名选择器
-     #box　id选择器
-     div p 后代选择器
-     div.box 交集选择器
-     div,p,span 并集选择器
-     div>p 子代选择器
-     * : 通配符
-     div+p: 选中div后面相邻的第一个p
-     div~p: 选中的div后面所有的p
-CSS3属性选择器
-    ^：开头  $：结尾  *：包含
-    E[title] 选中页面的E元素，并且E存在 title 属性即可。
-    E[title="abc"]选中页面的E元素，并且E需要带有title属性，且属性值完全等于abc。
-    E[attr~=val] 选择具有 att 属性且属性值为：用空格分隔的字词列表，其中一个等于 val 的E元素。
-    E[attr|=val] 表示要么是一个单独的属性值，要么这个属性值是以“-”分隔的。
-    E[title^="abc"] 选中页面的E元素，并且E需要带有 title 属性,属性值以 abc 开头。
-    E[title$="abc"] 选中页面的E元素，并且E需要带有 title 属性,属性值以 abc 结尾。
-    E[title*="abc"] 选中页面的E元素，并且E需要带有 title 属性,属性值任意位置包含abc。
-CSS3伪元素选择器
-    E::before 设置在 元素E 前面（依据对象树的逻辑结构）的内容，配合content属性一起使用。
-    E::after 设置在 元素E 后面（依据对象树的逻辑结构）的内容，配合content属性一起使用。
-UI库:
-    ant design
-    iview
-    pc用element ui,移动端用vant
-盒模型中的 box-sizing 属性
-    外加模式：（css的默认方式）
-	    box-sizing: content-box;
-    解释：此时设置的 width 和 height 是内容区域的宽高。盒子的实际宽度 = 设置的 width + padding + border。此时改变 padding 和 border 的大小，也不会改变内容的宽高，而是盒子的总宽高发生变化。
-    内减模式：【需要注意】
-	    box-sizing: border-box;
-    解释：此时设置的 width 和 height 是盒子的总宽高。盒子的实际宽度 = 设置的 width。此时改变 padding 和 border 的大小，会改变内容的宽高，盒子的总宽高不变。
-    
-CSS和HTML结合的三种方式：行内样式表、内嵌样式表、外部样式表
-CSS四种基本选择器：标签选择器、类选择器、ID选择器、通用选择器
-CSS几种扩展选择器：后代选择器、交集选择器、并集选择器
-CSS样式优先级
+
+* div 标签选择器
+
+*    .box 类名选择器
+
+*   #box　id选择器
+
+*   div p 后代选择器
+
+*    div.box 交集选择器
+
+*    div,p,span 并集选择器
+
+*    div>p 子代选择器
+
+* : 通配符   
+
+*  div+p: 选中div后面相邻的第一个p     
+
+* div~p: 选中的div后面所有的p
+
+  CSS3属性选择器
+      ^：开头  $：结尾  *：包含
+      E[title] 选中页面的E元素，并且E存在 title 属性即可。
+      E[title="abc"]选中页面的E元素，并且E需要带有title属性，且属性值完全等于abc。
+      E[attr~=val] 选择具有 att 属性且属性值为：用空格分隔的字词列表，其中一个等于 val 的E元素。
+      E[attr|=val] 表示要么是一个单独的属性值，要么这个属性值是以“-”分隔的。
+      E[title^="abc"] 选中页面的E元素，并且E需要带有 title 属性,属性值以 abc 开头。
+      E[title$="abc"] 选中页面的E元素，并且E需要带有 title 属性,属性值以 abc 结尾。
+      E[title*="abc"] 选中页面的E元素，并且E需要带有 title 属性,属性值任意位置包含abc。
+  CSS3伪元素选择器
+      E::before 设置在 元素E 前面（依据对象树的逻辑结构）的内容，配合content属性一起使用。
+      E::after 设置在 元素E 后面（依据对象树的逻辑结构）的内容，配合content属性一起使用。
+  UI库:
+      ant design
+      iview
+      pc用element ui,移动端用vant
+  盒模型中的 box-sizing 属性
+      外加模式：（css的默认方式）
+  	    box-sizing: content-box;
+      解释：此时设置的 width 和 height 是内容区域的宽高。盒子的实际宽度 = 设置的 width + padding + border。此时改变 padding 和 border 的大小，也不会改变内容的宽高，而是盒子的总宽高发生变化。
+      内减模式：【需要注意】
+  	    box-sizing: border-box;
+      解释：此时设置的 width 和 height 是盒子的总宽高。盒子的实际宽度 = 设置的 width。此时改变 padding 和 border 的大小，会改变内容的宽高，盒子的总宽高不变。
+      
+  CSS和HTML结合的三种方式：行内样式表、内嵌样式表、外部样式表
+  CSS四种基本选择器：标签选择器、类选择器、ID选择器、通用选择器
+  CSS几种扩展选择器：后代选择器、交集选择器、并集选择器
+  CSS样式优先级
 
 伪类：同一个标签，根据其不同的种状态，有不同的样式。这就叫做“伪类
 1）静态伪类：只能用于超链接的样式。如下：
@@ -116,6 +127,6 @@ css中一共有三种手段，使一个元素脱离标准文档流：
         相对定位不脱标
         （1）微调元素
         （2）做绝对定位的参考，子绝父相
-	   
+       
         # 固定定位 position: fixed;    
         就是相对浏览器窗口进行定位。无论页面如何滚动，这个盒子显示的位置不变。
